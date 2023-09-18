@@ -1,0 +1,14 @@
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.runtimeconfig.json
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.AssemblyReference.cache
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfoInputs.cache
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfo.cs
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.genruntimeconfig.cache
+C:\Users\acern\source\ReactProjects\Assignment01Solution_SE150543\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll

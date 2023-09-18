@@ -1,0 +1,9 @@
+﻿version: '3'
+services:
+  estoreapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "49161:80"
+      - "49160:443"
