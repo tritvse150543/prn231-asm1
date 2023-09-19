@@ -8,4 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DataAccessLayer
-build_property.ProjectDir = C:\Users\acern\source\Fall2023\Assignment01Solution_SE150543\BusinessLayer\
+build_property.ProjectDir = C:\Users\TRID\MyOwnProjects\PRN231_FA23\prn231-asm1\BusinessLayer\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

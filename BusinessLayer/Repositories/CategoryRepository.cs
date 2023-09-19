@@ -1,4 +1,4 @@
-﻿using DataAccessLayer.Models;
+﻿using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace DataAccessLayer.Repositories
 {
     public class CategoryRepository : GenericRepository<Category>
     {
-        public CategoryRepository(DbContext context) : base(context)
+        public CategoryRepository(DatabaseContext context) : base(context)
         {
         }
     }
