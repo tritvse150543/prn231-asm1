@@ -49,6 +49,16 @@ namespace DataAccessLayer.Repositories
         public void Delete(int id)
         {
             TEntity entity = _dbSet.Find(id);
+            try
+            {
+                Delete(entity);
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        public void Delete(TEntity entity)
+        {
             _dbSet.Remove(entity);
             _context.SaveChanges();
         }

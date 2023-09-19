@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessObject.Models;
 using DataAccessLayer.Repositories;
+using eStoreAPI.DTOs;
 using eStoreAPI.DTOs.Member;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,12 @@ namespace eStoreAPI.Controllers
     public class MemberController : ControllerBase
     {
         private readonly MemberRepository memberRepository;
+        private readonly OrderRepository orderRepository;
         private readonly IMapper mapper;
-        public MemberController(MemberRepository memberRepository, IMapper mapper)
+        public MemberController(MemberRepository memberRepository, OrderRepository orderRepository, IMapper mapper)
         {
             this.memberRepository = memberRepository;
+            this.orderRepository = orderRepository;
             this.mapper = mapper;
         }
         [HttpGet]
@@ -39,7 +42,8 @@ namespace eStoreAPI.Controllers
             var member = mapper.Map<Member>(request);
             member.MemberId = memberRepository.FindAll().Max(x => x.MemberId) + 1;
             memberRepository.Add(member);
-            return new ObjectResult("Created")
+
+            return new ObjectResult(new IdDTO { id = member.MemberId })
             {
                 StatusCode = 201,
             };
@@ -52,10 +56,24 @@ namespace eStoreAPI.Controllers
             {
                 return BadRequest($"Member Id: {id} not found");
             }
-            mapper.Map(request,member);
+            mapper.Map(request, member);
             memberRepository.Update(member);
             return Ok();
         }
-        
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            var orders = orderRepository.FindAll(x => x.MemberId ==  id);
+            if (orders.Count > 0)
+            {
+                return new ObjectResult("Cant delete")
+                {
+                    StatusCode = 400
+                };
+            }
+            memberRepository.Delete(id);
+            return Ok();
+        }
+
     }
 }
