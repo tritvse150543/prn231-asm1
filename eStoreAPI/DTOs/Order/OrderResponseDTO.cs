@@ -8,6 +8,15 @@
         public DateTime? RequiredDate { get; set; }
         public DateTime? ShippedDate { get; set; }
         public decimal? Freight { get; set; }
-        public String MemberName { get; set; }
+        public String MemberName { get; set; } = "";
+        public List<OrderDetailDTO> orderDetailDTOs { get; set; } = new List<OrderDetailDTO>();
+    }
+    public class OrderDetailDTO
+    {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public decimal UnitPrice { get; set; }
+        public int Quantity { get; set; }
+        public double Discount { get; set; }
     }
 }

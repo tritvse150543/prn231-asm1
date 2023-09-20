@@ -29,6 +29,13 @@ namespace eStoreAPI.Controllers
             var dtos = products.Select(x => mapper.Map<ProductResponseDTO>(x));
             return Ok(dtos);
         }
+        [HttpGet("{id}")]
+        public IActionResult Get([FromRoute]int id)
+        {
+            var products = productRepository.FindById(id);
+            var dto = mapper.Map<ProductResponseDTO>(products);
+            return Ok(dto);
+        }
         [HttpGet("search")]
         public IActionResult Get([FromQuery] decimal? UnitPrice, [FromQuery] string? ProductName) 
         {
