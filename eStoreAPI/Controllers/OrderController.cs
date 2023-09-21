@@ -14,8 +14,9 @@ namespace eStoreAPI.Controllers
         private readonly OrderRepository orderRepository;
         private readonly OrderDetailRepository detailRepository;
         private readonly ProductRepository productRepository;
+        MemberRepository memberRepository;
         private readonly IMapper mapper;
-        public OrderController(OrderRepository orderRepository, OrderDetailRepository detailRepository, ProductRepository productRepository, IMapper mapper)
+        public OrderController(MemberRepository memberRepository, OrderRepository orderRepository, OrderDetailRepository detailRepository, ProductRepository productRepository, IMapper mapper)
         {
             this.orderRepository = orderRepository;
             this.detailRepository = detailRepository;
@@ -32,7 +33,7 @@ namespace eStoreAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var order = orderRepository.FindAll(null, x => x.Member).FirstOrDefault(x => x.MemberId == id);
+            var order = orderRepository.FindAll(null, x => x.Member).FirstOrDefault(x => x.OrderId == id);
             if (order == null)
             {
                 return BadRequest("Not found");
@@ -71,6 +72,11 @@ namespace eStoreAPI.Controllers
         public IActionResult Create([FromBody] OrderCreateRequestDTO dto)
         {
             var order = mapper.Map<Order>(dto);
+            var member = memberRepository.FindById((int)dto.MemberId);
+            if (member == null)
+            {
+                return NotFound();
+            }
             order.OrderId = orderRepository.FindAll().Max(x => x.OrderId) + 1;
             var orderDetails = new List<OrderDetail>(); 
             foreach(var request in dto.ProductIds)

@@ -32,6 +32,10 @@ namespace eStoreAPI.Controllers
         public IActionResult Get([FromRoute] int id)
         {
             var member = memberRepository.FindById(id);
+            if (member == null)
+            {
+                return NotFound();
+            }
             return new ObjectResult(mapper.Map<MemberResponseDTO>(member));
         }
 
@@ -64,6 +68,12 @@ namespace eStoreAPI.Controllers
         public IActionResult Delete([FromRoute] int id)
         {
             var orders = orderRepository.FindAll(x => x.MemberId ==  id);
+            var member = memberRepository.FindById(id);
+            if (member == null)
+            {
+                return NotFound();
+            }
+
             if (orders.Count > 0)
             {
                 return new ObjectResult("Cant delete")
@@ -71,6 +81,8 @@ namespace eStoreAPI.Controllers
                     StatusCode = 400
                 };
             }
+          
+            
             memberRepository.Delete(id);
             return Ok();
         }
