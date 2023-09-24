@@ -43,8 +43,14 @@ namespace eStoreAPI.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] MemberCreateRequestDTO request)
         {
+            var members = memberRepository.FindAll();
+            if (members.Exists(x => x.Email == request.Email.Trim()))
+            {
+                return BadRequest("Email Already Existed");
+            }
+
             var member = mapper.Map<Member>(request);
-            member.MemberId = memberRepository.FindAll().Max(x => x.MemberId) + 1;
+            member.MemberId = members.Max(x => x.MemberId) + 1;
             memberRepository.Add(member);
 
             return new ObjectResult(new IdDTO { id = member.MemberId })
@@ -87,5 +93,6 @@ namespace eStoreAPI.Controllers
             return Ok();
         }
 
+      
     }
 }

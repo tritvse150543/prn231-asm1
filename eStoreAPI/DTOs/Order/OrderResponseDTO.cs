@@ -11,6 +11,12 @@
         public String MemberName { get; set; } = "";
         public List<OrderDetailDTO> orderDetailDTOs { get; set; } = new List<OrderDetailDTO>();
     }
+
+    public class OrderReportDTO : OrderResponseDTO
+    {
+        public decimal TotalAmount { get;set; }
+    }
+
     public class OrderDetailDTO
     {
         public int ProductId { get; set; }

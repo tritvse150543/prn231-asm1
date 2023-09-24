@@ -21,6 +21,7 @@ namespace eStoreAPI.Controllers
             this.orderRepository = orderRepository;
             this.detailRepository = detailRepository;
             this.productRepository = productRepository;
+            this.memberRepository = memberRepository;
             this.mapper = mapper;
         }
         [HttpGet]
@@ -41,12 +42,13 @@ namespace eStoreAPI.Controllers
             var dto = mapper.Map<OrderResponseDTO>(order);
             return Ok(dto);
         }
-        [HttpGet("details")]
+        [HttpGet("details/{id}")]
         public IActionResult GetDetails(int id)
         {
             try
             {
-                var order = orderRepository.FindAll(null, x => x.OrderDetails).FirstOrDefault(x => x.OrderId == id);
+                var order = orderRepository.FindAll(null,x => x.Member , x => x.OrderDetails)
+                    .FirstOrDefault(x => x.OrderId == id);
                 foreach (var detail in order.OrderDetails)
                 {
                     var product = productRepository.FindById(detail.ProductId);
@@ -64,8 +66,8 @@ namespace eStoreAPI.Controllers
         {
             var orders = orderRepository
                 .FindAll(x => x.OrderDate >= startDate && x.OrderDate <= endDate, x => x.Member, x => x.OrderDetails)
-                .OrderBy(x => x.OrderDetails.Sum(y => y.Quantity * y.UnitPrice))
-                .Select(x => mapper.Map<OrderResponseDTO>(x));
+                .OrderByDescending(x => x.OrderDetails.Sum(y => y.Quantity * y.UnitPrice))
+                .Select(x => mapper.Map<OrderReportDTO>(x));           
             return Ok(orders);
         }
         [HttpPost]
@@ -124,11 +126,24 @@ namespace eStoreAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult Update([FromRoute] int id,[FromBody] OrderUpdateRequestDTO dto)
         {
+
             var order = orderRepository.FindById(id);
             mapper.Map(dto,order);
             orderRepository.Update(order);
             return Ok();
         }
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] int id)
+        {
 
+            var order = orderRepository.FindAll(x => x.OrderId == id, x => x.OrderDetails).FirstOrDefault();
+            if (order == null) return NotFound();
+            foreach (var detail in order.OrderDetails)
+            {
+                detailRepository.Delete(detail);
+            }
+            orderRepository.Delete(order);
+            return Ok();
+        }
     }
 }

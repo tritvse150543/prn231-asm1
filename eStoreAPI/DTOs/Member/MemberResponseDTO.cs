@@ -34,7 +34,7 @@ namespace eStoreAPI.DTOs.Member
     }
     public class MemberUpdateRequestDTO
     {
-
+        public int id { get; set; }
         [MaxLength(40, ErrorMessage = "Companyname Length error")]
         [Required(ErrorMessage = "CompanyName is required")]
         public string CompanyName { get; set; }

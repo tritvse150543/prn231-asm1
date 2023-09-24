@@ -25,14 +25,14 @@ namespace eStoreAPI.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var products = productRepository.FindAll();
+            var products = productRepository.FindAll(null,x => x.Category);
             var dtos = products.Select(x => mapper.Map<ProductResponseDTO>(x));
             return Ok(dtos);
         }
         [HttpGet("{id}")]
         public IActionResult Get([FromRoute]int id)
         {
-            var products = productRepository.FindById(id);
+            var products = productRepository.FindAll(x => x.ProductId == id, x => x.Category).FirstOrDefault();
             var dto = mapper.Map<ProductResponseDTO>(products);
             return Ok(dto);
         }

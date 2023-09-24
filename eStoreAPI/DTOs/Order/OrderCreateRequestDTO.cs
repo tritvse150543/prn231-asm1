@@ -15,6 +15,7 @@ namespace eStoreAPI.DTOs.Order
     }
     public class OrderUpdateRequestDTO
     {
+        public int OrderId { get; set; }    
         public int? MemberId { get; set; }
         [Required]
         public DateTime OrderDate { get; set; }

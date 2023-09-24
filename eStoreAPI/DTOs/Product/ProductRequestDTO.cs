@@ -15,6 +15,7 @@ namespace eStoreAPI.DTOs.Product
     }
     public class ProductUpdateRequestDTO
     {
+        public int id { get; set; }
         public int? CategoryId { get; set; }
         [Required(ErrorMessage = "Product Name is required")]
         [MaxLength(40, ErrorMessage = "Product Name length is 40")]
